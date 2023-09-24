@@ -88,4 +88,13 @@ public class Library {
                 .unmodifiableList(books);
     }
 
+    public Receipt returnBook(RentedBook rentedBook, Double amount) {
+        Receipt receipt = new Receipt();
+        receipt.bookName = rentedBook.getBook().getName();
+        receipt.receiptDate = LocalDate.now();
+        receipt.amountGiven = amount;
+        receipt.actualAmount = calculateBookRent(rentedBook);
+        receipt.balanceToBeReturned = receipt.amountGiven - receipt.actualAmount;
+        return receipt;
+    }
 }

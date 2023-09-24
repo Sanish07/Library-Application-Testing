@@ -99,5 +99,18 @@ class LibraryTest {
         Mockito.verify(rentedBook,Mockito.times(2)).getRentedDate();
     }
 
+    //Test-Driven Development approach below - Write failing test case and then
+    // implement the functionality in main application
+    @Test
+    public void when_returning_book_receipt_should_be_returned(){
+        RentedBook rentedBook = library.rent("The God Of Small Things");
+        Double amount = 5.0;
+        Receipt bookReceipt = library.returnBook(rentedBook, amount);
+        assertNotNull(bookReceipt);
+        assertThat(bookReceipt.bookName, equalTo("The God Of Small Things"));
+        assertThat(bookReceipt.receiptDate, equalTo(LocalDate.now()));
+        assertThat(bookReceipt.amountGiven, equalTo(amount));
+    }
+
 
 }
